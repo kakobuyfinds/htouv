@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#123e31">
+<title>OopBuy spreadsheet | CAFANS Finds & Buying Checklist</title>
+<meta name="description" content="Explore an OopBuy spreadsheet guide with real CAFANS product listings, category filters, reference USD prices, sizing checks and a shopping budget worksheet.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="OopBuy spreadsheet | Browse, Compare & Plan">
+<meta property="og:description" content="Real CAFANS listings, searchable categories and practical checks for your next shopping shortlist.">
+<meta name="twitter:card" content="summary">
+<!--
+Filename: index.html
+
+Research references:
+https://oopspreadsheet.com/
+https://ooopbuy.me/
+https://oopbuysheet.com/
+https://zentbuyspreadsheet.com/oopbuy-spreadsheet
+
+Search results were reviewed; exact Google first-page positions were not independently verified.
+Implementation priorities: static crawlable product rows, clear destination disclosure,
+source links, honest reference prices, working filters, a CSV export and a manual cost worksheet.
+No claim of ranking superiority or guaranteed indexing is made.
+
+Catalog source: https://cafans.com/
+This is a small manually imported catalog snapshot, not a live feed.
+Product names and reference amounts must be checked at the source before purchase.
+
+DEPLOYMENT:
+A public deployment URL and verified webmaster access were not provided.
+Google and Bing submission has NOT been completed.
+After deployment:
+1. Add a canonical tag using this page's actual public URL.
+2. Add the actual URL to a sitemap and reference that sitemap in robots.txt.
+3. Verify the deployed property in Google Search Console and Bing Webmaster Tools.
+4. Submit the sitemap and request inspection/indexing for the actual public URL.
+No verification tokens, canonical domain or submission status have been fabricated.
+-->
+<style>
+:root{--bg:#f5f4ed;--paper:#fffef9;--ink:#16392f;--muted:#627269;--green:#123e31;--lime:#d7f391;--line:#dce1d5;--radius:20px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.65}
+a{color:inherit;text-underline-offset:4px}
+button,input,select{font:inherit}
+button,a,input,select,summary{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid #719d24;outline-offset:4px}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+.skip{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:10}
+.skip:focus{top:10px}
+header{border-bottom:1px solid var(--line)}
+.header{min-height:85px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{text-decoration:none;font-weight:900;letter-spacing:-1px;font-size:23px}
+.logo span{font-size:11px;letter-spacing:2px;display:block;color:var(--muted)}
+nav{display:flex;gap:22px;font-size:14px;flex-wrap:wrap}
+nav a{text-decoration:none}
+.hero{text-align:center;padding:82px 0 64px}
+.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted)}
+h1{font-size:clamp(43px,7vw,83px);letter-spacing:-4px;line-height:1.04;margin:20px auto 25px;max-width:900px}
+h1 em{font-style:normal;color:#5f7e2c}
+.lead{max-width:690px;margin:0 auto;color:var(--muted);font-size:18px}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:30px 0 18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 23px;border:1px solid var(--green);border-radius:100px;text-decoration:none;font-weight:700;background:var(--green);color:white;cursor:pointer}
+.btn.alt{background:var(--lime);color:var(--green);border-color:var(--lime)}
+.btn.small{font-size:13px;min-height:38px;padding:8px 15px}
+.note{font-size:13px;color:var(--muted)}
+.hero .note{max-width:700px;margin:0 auto}
+.ribbon{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);background:var(--paper);border-radius:var(--radius);overflow:hidden}
+.ribbon div{padding:23px;text-align:center}
+.ribbon div+div{border-left:1px solid var(--line)}
+.ribbon strong{display:block;font-size:18px}
+.ribbon span{font-size:13px;color:var(--muted)}
+section{padding:58px 0;scroll-margin-top:20px}
+.section-top{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
+h2{font-size:clamp(26px,4vw,39px);letter-spacing:-1px;line-height:1.2;margin:8px 0 16px}
+h3{line-height:1.3;margin:0 0 12px;font-size:19px}
+p{margin:0 0 16px}
+.section-top p{color:var(--muted);max-width:650px;margin-bottom:0}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.tools{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
+label{display:block;font-size:13px;font-weight:700}
+input,select{display:block;width:100%;border:1px solid #becabd;border-radius:10px;background:white;padding:12px;color:var(--ink);margin-top:7px;min-height:47px}
+.table-scroll{overflow:auto;border:1px solid var(--line);border-radius:16px;background:var(--paper);margin-top:20px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+caption{text-align:left;padding:17px 20px;font-weight:700;border-bottom:1px solid var(--line)}
+th,td{text-align:left;padding:18px 20px;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);background:#eef2e6}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{min-width:235px;font-weight:700}
+td:nth-child(3){white-space:nowrap}
+.tag{display:inline-block;font-size:12px;background:#edf2e4;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.catalog-footer{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-top:16px}
+#empty{padding:20px;background:white;border:1px dashed var(--line);border-radius:12px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.number{font-size:13px;color:#6d844b;font-weight:bold;display:block;margin-bottom:23px}
+.cards p,.split p{color:var(--muted);font-size:15px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.checks{padding-left:20px;margin:0}
+.checks li{margin:12px 0}
+.budget{background:var(--green);color:white;border-radius:26px;padding:34px}
+.budget .eyebrow,.budget p{color:#c4d3c6}
+.budget input{border:0}
+.fields{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.total{font-size:40px;font-weight:800;letter-spacing:-1px;margin:22px 0 6px}
+details{border-bottom:1px solid var(--line);padding:19px 0}
+summary{font-weight:700;cursor:pointer;padding-right:20px}
+details p{margin:14px 0 0;color:var(--muted);max-width:850px}
+.end{text-align:center;background:#e8eddd;border-radius:25px;padding:42px 25px;margin:20px 0 55px}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--muted)}
+.footer-grid{display:flex;justify-content:space-between;gap:30px}
+footer p{max-width:750px}
+[hidden]{display:none!important}
+@media(max-width:760px){
+.header{align-items:flex-start;padding:20px 0;flex-direction:column;gap:14px}
+nav{gap:17px;font-size:13px}
+.hero{padding:53px 0 40px}
+h1{letter-spacing:-2px}
+.lead{font-size:16px}
+.ribbon div{padding:18px 10px}
+.ribbon strong{font-size:14px}
+.ribbon span{font-size:11px}
+.tools,.cards,.split{grid-template-columns:1fr}
+.fields{grid-template-columns:1fr 1fr}
+.section-top{display:block}
+section{padding:37px 0}
+.panel{padding:21px}
+.budget{padding:25px}
+.footer-grid{display:block}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"OopBuy spreadsheet | CAFANS Finds & Buying Checklist",
+  "inLanguage":"en",
+  "description":"An independent product discovery guide with a manually imported CAFANS catalog snapshot, category filters and a budget worksheet.",
+  "about":{"@type":"Thing","name":"OopBuy spreadsheet"},
+  "isAccessibleForFree":true,
+  "mainEntity":{
+    "@type":"ItemList",
+    "name":"CAFANS product snapshot",
+    "numberOfItems":6,
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Leather Slides","url":"https://cafans.com/goods-158791.html"},
+      {"@type":"ListItem","position":2,"name":"Platform Slides"},
+      {"@type":"ListItem","position":3,"name":"Heels"},
+      {"@type":"ListItem","position":4,"name":"Sweatshirt","url":"https://cafans.com/goods-158792.html"},
+      {"@type":"ListItem","position":5,"name":"Unisex Embroidered Oversized T-Shirt","url":"https://cafans.com/goods-158200.html"},
+      {"@type":"ListItem","position":6,"name":"Unisex T-Shirt"}
+    ]
+  }
+}
+</script>
+<link rel="canonical" href="https://kakobuyfinds.github.io/htouv/">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+<div class="wrap header">
+<a class="logo" href="https://cafans.com">THE FIND INDEX<span>INDEPENDENT SHOPPING GUIDE</span></a>
+<nav aria-label="Main navigation">
+<a href="#catalog">Product directory</a>
+<a href="#guide">Buying guide</a>
+<a href="#budget">Budget planner</a>
+<a href="#faq">FAQ</a>
+</nav>
+</div>
+</header>
+
+<main id="main" class="wrap">
+<div class="hero">
+<div class="eyebrow">Finds / Fit / Thoughtful comparisons</div>
+<h1>OopBuy spreadsheet.<br><em>A clearer shortlist.</em></h1>
+<p class="lead">Browse real CAFANS listings, narrow your options and keep the details that matter together—from garment measurements to your estimated total cost.</p>
+<div class="actions">
+<a class="btn" href="https://cafans.com">OopBuy spreadsheet <span aria-hidden="true">&nbsp;↗</span></a>
+<a class="btn alt" href="https://cafans.com">Buy it now <span aria-hidden="true">&nbsp;↗</span></a>
+</div>
+<p class="note">Both buttons open CAFANS. This independent guide is not operated by OopBuy. These are CAFANS catalog listings; OopBuy ordering availability has not been verified.</p>
+</div>
+
+<div class="ribbon" aria-label="Directory features">
+<div><strong>Real source listings</strong><span>A compact CAFANS snapshot</span></div>
+<div><strong>Useful comparisons</strong><span>Search, filter and sort</span></div>
+<div><strong>Clear next steps</strong><span>Check fit, details and cost</span></div>
+</div>
+
+<section id="catalog" aria-labelledby="catalog-title">
+<div class="section-top">
+<div>
+<div class="eyebrow">01 / The directory</div>
+<h2 id="catalog-title">Explore the product shortlist</h2>
+<p>Six listings imported from the CAFANS homepage. USD amounts are source reference estimates, exclude additional charges and may change. This snapshot is not synchronized with stock or checkout prices.</p>
+</div>
+<a class="btn small" href="https://cafans.com">Browse full CAFANS catalog ↗</a>
+</div>
+
+<div class="panel tools" id="catalog-tools" hidden>
+<label>Search this snapshot
+<input id="search" type="search" placeholder="Try slides, sweatshirt or T-shirt" autocomplete="off">
+</label>
+<label>Category
+<select id="category">
+<option value="all">All categories</option>
+<option value="Shoes">Shoes</option>
+<option value="Hoodies / Sweaters">Hoodies / Sweaters</option>
+<option value="T-Shirts">T-Shirts</option>
+</select>
+</label>
+<label>Sort listings
+<select id="sort">
+<option value="original">Original order</option>
+<option value="low">Reference price: low to high</option>
+<option value="high">Reference price: high to low</option>
+<option value="name">Product name: A–Z</option>
+</select>
+</label>
+</div>
+
+<div class="table-scroll">
+<table>
+<caption>CAFANS catalog snapshot · Reference USD prices</caption>
+<thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col">Reference USD</th><th scope="col">Source</th></tr></thead>
+<tbody id="products">
+<tr data-category="Shoes" data-price="62.36"><td>Leather Slides</td><td><span class="tag">Shoes</span></td><td>$62.36</td><td><a href="https://cafans.com/goods-158791.html">Product details ↗</a></td></tr>
+<tr data-category="Shoes" data-price="46.67"><td>Platform Slides</td><td><span class="tag">Shoes</span></td><td>$46.67</td><td><a href="https://cafans.com">Find on CAFANS ↗</a></td></tr>
+<tr data-category="Shoes" data-price="66.50"><td>Heels</td><td><span class="tag">Shoes</span></td><td>$66.50</td><td><a href="https://cafans.com">Find on CAFANS ↗</a></td></tr>
+<tr data-category="Hoodies / Sweaters" data-price="27.50"><td>Sweatshirt</td><td><span class="tag">Hoodies / Sweaters</span></td><td>$27.50</td><td><a href="https://cafans.com/goods-158792.html">Product details ↗</a></td></tr>
+<tr data-category="T-Shirts" data-price="32.64"><td>Unisex Embroidered Oversized T-Shirt</td><td><span class="tag">T-Shirts</span></td><td>$32.64</td><td><a href="https://cafans.com/goods-158200.html">Product details ↗</a></td></tr>
+<tr data-category="T-Shirts" data-price="29.72"><td>Unisex T-Shirt</td><td><span class="tag">T-Shirts</span></td><td>$29.72</td><td><a href="https://cafans.com">Find on CAFANS ↗</a></td></tr>
+</tbody>
+</table>
+</div>
+<p id="empty" hidden>No matching listings. Try a broader search or choose all categories.</p>
+<div class="catalog-footer">
+<span class="note" id="count" role="status" aria-live="polite">6 source listings · Check current details on CAFANS</span>
+<button class="btn small" id="export" type="button" hidden>Export visible rows as CSV ↓</button>
+</div>
+<noscript><p class="note">All product rows and source links are available above. Enable JavaScript to filter, sort, export or calculate a budget.</p></noscript>
+</section>
+
+<section id="guide" aria-labelledby="guide-title">
+<div class="eyebrow">02 / Start with the details</div>
+<h2 id="guide-title">How to use an OopBuy spreadsheet</h2>
+<p>An OopBuy spreadsheet is a product research list that helps you organize finds and revisit their source listings. This page provides an independent CAFANS-based starting point. A product appearing here does not establish its availability through a particular agent.</p>
+<div class="cards">
+<article class="panel">
+<span class="number">01 — DISCOVER</span>
+<h3>Choose a useful category</h3>
+<p>Filter the directory by product type, then compare similar options. Record the exact color, size and quantity you want rather than relying on a product name alone.</p>
+</article>
+<article class="panel">
+<span class="number">02 — VERIFY</span>
+<h3>Open the source listing</h3>
+<p>Check the current product page for the selected option, seller information, measurements and price. Keep unanswered questions in your shortlist until you can confirm them.</p>
+</article>
+<article class="panel">
+<span class="number">03 — PLAN</span>
+<h3>Confirm the buying route</h3>
+<p>If using an agent, confirm it accepts the original listing before paying. Review its current service terms, inspection options, fees and shipping quote for your destination.</p>
+</article>
+</div>
+</section>
+
+<section aria-labelledby="checks-title">
+<div class="eyebrow">03 / Before you decide</div>
+<h2 id="checks-title">Turn a find into a useful comparison</h2>
+<div class="split">
+<article class="panel">
+<h3>Fit and product details</h3>
+<ul class="checks">
+<li><strong>Footwear:</strong> record the sizing system, width notes and any supplied insole measurements.</li>
+<li><strong>T-shirts and sweatshirts:</strong> compare chest width and body length with a garment you already wear.</li>
+<li><strong>Materials:</strong> save the seller’s stated composition; appearance alone cannot confirm fabric or leather type.</li>
+<li><strong>Options:</strong> keep the chosen size, color and number of pieces beside the listing link.</li>
+</ul>
+</article>
+<article class="panel">
+<h3>Photos and inspection notes</h3>
+<ul class="checks">
+<li>Distinguish listing photographs from photos of the actual item being purchased.</li>
+<li>When inspection photos are available, examine seams, closures, visible marks and the selected option.</li>
+<li>Ask for a measurement photo if a missing dimension could change your decision.</li>
+<li>Photos can reveal visible issues but do not establish authenticity, durability or complete product quality.</li>
+</ul>
+</article>
+</div>
+</section>
+
+<section id="budget" aria-labelledby="budget-title">
+<div class="budget">
+<div class="eyebrow">04 / Make the numbers visible</div>
+<h2 id="budget-title">Your shopping budget worksheet</h2>
+<p>Enter your own USD estimates. Add confirmed charges separately and leave room for costs that are still unknown. This worksheet does not fetch agent rates or calculate tax rules.</p>
+<div class="fields">
+<label>Item subtotal (USD)<input class="cost" id="items" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+<label>Domestic delivery (USD)<input class="cost" id="domestic" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+<label>Agent / payment fees (USD)<input class="cost" id="fees" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+<label>International shipping (USD)<input class="cost" id="shipping" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+<label>Tax / duty estimate (USD)<input class="cost" id="tax" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+<label>Other costs (USD)<input class="cost" id="other" type="number" min="0" max="1000000" step="0.01" placeholder="0.00" inputmode="decimal"></label>
+</div>
+<div class="total"><output id="total" aria-live="polite">—</output></div>
+<p id="budget-status">Enter estimates to calculate a partial planning total.</p>
+<p class="note">Blank fields are unaccounted costs. Currency conversion, parcel dimensions, packaging and destination requirements may affect the final amount. Confirm current quotes before paying.</p>
+</div>
+</section>
+
+<section id="faq" aria-labelledby="faq-title">
+<div class="eyebrow">05 / Quick answers</div>
+<h2 id="faq-title">OopBuy spreadsheet FAQ</h2>
+<details open>
+<summary>Is this the official OopBuy website?</summary>
+<p>No. This is an independent discovery guide. Its main shopping buttons lead to CAFANS, and the directory contains CAFANS source listings. It does not process orders or provide OopBuy customer support.</p>
+</details>
+<details>
+<summary>Are these live prices and in-stock products?</summary>
+<p>No. The table is a manually imported snapshot of six CAFANS listings with reference USD estimates. Availability, product options and final amounts must be checked on the current source page.</p>
+</details>
+<details>
+<summary>Can I order every listing through OopBuy?</summary>
+<p>That has not been verified. Open the CAFANS product details, locate the original seller link where available, and confirm that your chosen agent accepts it before adding funds or placing an order.</p>
+</details>
+<details>
+<summary>Is there a downloadable spreadsheet?</summary>
+<p>With JavaScript enabled, the export button downloads the currently visible rows as a CSV file. It includes product names, categories, reference prices and the available CAFANS source links. The CSV is a research snapshot, not a live inventory feed.</p>
+</details>
+<details>
+<summary>How should I compare sizing?</summary>
+<p>Use the measurement guidance for the exact listing and selected option. Compare equivalent measurements in the same units with a well-fitting item you own. A size label by itself is not enough to establish fit.</p>
+</details>
+<details>
+<summary>Does the listed item price include shipping?</summary>
+<p>The amounts shown here are product reference estimates. Do not assume they include domestic delivery, international freight, service fees or taxes. Use the worksheet to record your own estimates and confirm the final quote with the relevant provider.</p>
+</details>
+</section>
+
+<div class="end">
+<div class="eyebrow">Your next find starts with a better question</div>
+<h2>Browse. Check. Then choose.</h2>
+<p>Continue to CAFANS for the full directory and current listing details.</p>
+<div class="actions">
+<a class="btn" href="https://cafans.com">OopBuy spreadsheet ↗</a>
+<a class="btn alt" href="https://cafans.com">Buy it now ↗</a>
+</div>
+</div>
+</main>
+
+<footer>
+<div class="wrap footer-grid">
+<div>
+<strong>THE FIND INDEX · OopBuy spreadsheet guide</strong>
+<p>Independent product research resource. Product names identify source listings and do not imply brand affiliation, authorization or authenticity. CAFANS and the selected shopping provider determine their own availability, prices and order terms.</p>
+</div>
+<a href="https://cafans.com">Catalog source: CAFANS ↗</a>
+</div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+const body=document.getElementById("products");
+const rows=Array.from(body.rows);
+const search=document.getElementById("search");
+const category=document.getElementById("category");
+const sort=document.getElementById("sort");
+const count=document.getElementById("count");
+const empty=document.getElementById("empty");
+const exportButton=document.getElementById("export");
+
+document.getElementById("catalog-tools").hidden=false;
+exportButton.hidden=false;
+
+function update(){
+ const query=search.value.trim().toLowerCase();
+ const selected=category.value;
+ const arranged=rows.slice();
+ if(sort.value==="low") arranged.sort((a,b)=>Number(a.dataset.price)-Number(b.dataset.price));
+ if(sort.value==="high") arranged.sort((a,b)=>Number(b.dataset.price)-Number(a.dataset.price));
+ if(sort.value==="name") arranged.sort((a,b)=>a.cells[0].textContent.localeCompare(b.cells[0].textContent));
+ let visible=0;
+ arranged.forEach(row=>{
+  row.hidden=!(row.textContent.toLowerCase().includes(query)&&(selected==="all"||row.dataset.category===selected));
+  if(!row.hidden) visible++;
+  body.appendChild(row);
+ });
+ empty.hidden=visible!==0;
+ count.textContent=visible+" of "+rows.length+" source listings shown · Reference prices only";
+ exportButton.disabled=visible===0;
+}
+search.addEventListener("input",update);
+category.addEventListener("change",update);
+sort.addEventListener("change",update);
+
+exportButton.addEventListener("click",function(){
+ const csvRows=[["Product","Category","Reference price USD","CAFANS source URL"]];
+ Array.from(body.rows).filter(row=>!row.hidden).forEach(row=>{
+  csvRows.push([row.cells[0].textContent.trim(),row.dataset.category,row.dataset.price,row.querySelector("a").href]);
+ });
+ const quote=value=>'"'+String(value).replace(/"/g,'""')+'"';
+ const csv="\uFEFF"+csvRows.map(row=>row.map(quote).join(",")).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+ const link=document.createElement("a");
+ link.href=url;
+ link.download="oopbuy-spreadsheet-cafans-snapshot.csv";
+ document.body.appendChild(link);
+ link.click();
+ link.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+
+const costs=Array.from(document.querySelectorAll(".cost"));
+const total=document.getElementById("total");
+const budgetStatus=document.getElementById("budget-status");
+const money=new Intl.NumberFormat("en-US",{style:"currency",currency:"USD"});
+function calculate(){
+ let sum=0,filled=0,invalid=false;
+ costs.forEach(input=>{
+  if(input.value!==""){
+   if(!input.validity.valid||!Number.isFinite(input.valueAsNumber)){
+    invalid=true;
+   }else{
+    sum+=input.valueAsNumber;
+    filled++;
+   }
+  }else if(input.validity.badInput){
+   invalid=true;
+  }
+ });
+ if(invalid){
+  total.textContent="Check inputs";
+  budgetStatus.textContent="Use nonnegative amounts up to 1,000,000, with no more than two decimal places.";
+  return;
+ }
+ total.textContent=filled?money.format(sum):"—";
+ budgetStatus.textContent=filled===0
+  ?"Enter estimates to calculate a partial planning total."
+  :filled===costs.length
+   ?"Planning total from your six entries. This is not a checkout quote."
+   :"Partial planning total · "+(costs.length-filled)+" cost fields remain unaccounted for.";
+}
+costs.forEach(input=>input.addEventListener("input",calculate));
+})();
+</script>
+</body>
+</html>
